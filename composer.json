@@ -1,7 +1,7 @@
 {
     "name": "iankok/msw-sdk",
     "description": "an SDK for magic seaweed",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "type": "library",
     "license": "MIT",
     "authors": [

@@ -16,7 +16,7 @@ class SpotsMapper implements Mapperable
     {
         return $this->map(
             json_decode(
-                substr(explode('jQuery1102022892981717069716_1554795982566(', (string)$response->getBody())[1], 0, -1)
+                (string)$response->getBody()
             )
         );
     }

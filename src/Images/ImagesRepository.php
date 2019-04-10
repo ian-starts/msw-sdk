@@ -1,13 +1,15 @@
 <?php
 
-namespace IanKok\MSWSDK\Spots;
+
+namespace IanKok\MSWSDK\Images;
+
 
 use GuzzleHttp\Promise\PromiseInterface;
 use IanKok\MSWSDK\Client\AuthenticatedMSWClient;
 use IanKok\MSWSDK\Contracts\Mapperable;
 use Psr\Http\Message\ResponseInterface;
 
-class SpotsRepository
+class ImagesRepository
 {
     /**
      * @var AuthenticatedMSWClient
@@ -15,12 +17,12 @@ class SpotsRepository
     protected $client;
 
     /**
-     * @var Mapperable $mapper
+     * @var Mapperable
      */
     protected $mapper;
 
     /**
-     * SpotsRepository constructor.
+     * ForecastRepository constructor.
      *
      * @param AuthenticatedMSWClient $client
      * @param Mapperable             $mapper
@@ -31,19 +33,26 @@ class SpotsRepository
         $this->mapper = $mapper;
     }
 
-    public function list(): array
+    /**
+     * @param string $id
+     *
+     * @return array
+     */
+    public function getBySpotId(string $id): array
     {
-        return $this->listAsync()->wait();
+        return $this->getBySpotIdAsync($id)->wait();
     }
 
     /**
+     * @param string $id
+     *
      * @return PromiseInterface
      */
-    public function listAsync(): PromiseInterface
+    public function getBySpotIdAsync(string $id): PromiseInterface
     {
         return $this->client->requestAsync(
             'GET',
-            '/api/mdkey//spot/?ne=46.55886030311719,3.3837890625000004&limit=-1&depth=1&fields=_id,name,description,lat,lon,url,hasNetcam,country.iso,country.name,country.url,region.name,region.url&_=1554795982568'
+            'api/mdkey/photo?limit=6&fields=_id,images.*,&order_by=dateAdded&order_direction=DESC&approved=true&removed=false&depth=1&spot_id=' . $id
         )->then(
             function (ResponseInterface $response) {
                 return $this->mapper->mapResponse($response);
