@@ -1,0 +1,29 @@
+{
+    "name": "iankok/msw-sdk",
+    "description": "an SDK for magic seaweed",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yoni Ian Kok",
+            "email": "hello@iankok.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "IanKok\\MSWSDK\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IanKok\\MSWSDK\\Test\\": "tests"
+        }
+    }
+}
