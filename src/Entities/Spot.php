@@ -7,6 +7,11 @@ class Spot
     /**
      * @var string
      */
+    protected $id;
+
+    /**
+     * @var string
+     */
     protected $name;
 
     /**
@@ -47,6 +52,7 @@ class Spot
     /**
      * Spot constructor.
      *
+     * @param string  $id
      * @param string  $name
      * @param string  $description
      * @param float   $lat
@@ -57,6 +63,7 @@ class Spot
      * @param Country $country
      */
     public function __construct(
+        string $id,
         string $name,
         string $description,
         float $lat,
@@ -66,6 +73,7 @@ class Spot
         Region $region,
         Country $country
     ) {
+        $this->id          = $id;
         $this->name        = $name;
         $this->description = $description;
         $this->lat         = $lat;
@@ -74,6 +82,14 @@ class Spot
         $this->hasNetcam   = $hasNetcam;
         $this->region      = $region;
         $this->country     = $country;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     /**

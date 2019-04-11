@@ -39,8 +39,9 @@ class SpotsMapper implements Mapperable
     public function mapEach($object)
     {
         $country = new Country($object->country->url, $object->country->name, $object->country->iso);
-        $region = new Region($object->country->name, $object->region->url);
+        $region = new Region($object->region->name, $object->region->url);
         return new Spot(
+            $object->_id,
             $object->name,
             $object->description,
             $object->lat,
