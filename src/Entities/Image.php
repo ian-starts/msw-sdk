@@ -12,41 +12,20 @@ class Image
     protected $id;
 
     /**
-     * @var string
+     * @var array | ImageDimension[]
      */
-    protected $dimension;
-
-    /**
-     * @var string
-     */
-    protected $width;
-
-    /**
-     * @var string
-     */
-    protected $height;
-
-    /**
-     * @var string
-     */
-    protected $url;
+    protected $dimensions;
 
     /**
      * Image constructor.
      *
-     * @param string $id
-     * @param string $dimension
-     * @param string $width
-     * @param string $height
-     * @param string $url
+     * @param string                 $id
+     * @param array|ImageDimension[] $dimensions
      */
-    public function __construct(string $id, string $dimension, string $width, string $height, string $url)
+    public function __construct(string $id, $dimensions)
     {
-        $this->id        = $id;
-        $this->dimension = $dimension;
-        $this->width     = $width;
-        $this->height    = $height;
-        $this->url       = $url;
+        $this->id         = $id;
+        $this->dimensions = $dimensions;
     }
 
     /**
@@ -58,35 +37,12 @@ class Image
     }
 
     /**
-     * @return string
+     * @return array|ImageDimension[]
      */
-    public function getDimension(): string
+    public function getDimensions()
     {
-        return $this->dimension;
+        return $this->dimensions;
     }
 
-    /**
-     * @return string
-     */
-    public function getWidth(): string
-    {
-        return $this->width;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHeight(): string
-    {
-        return $this->height;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
 
 }

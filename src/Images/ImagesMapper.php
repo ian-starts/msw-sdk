@@ -6,6 +6,7 @@ namespace IanKok\MSWSDK\Images;
 
 use IanKok\MSWSDK\Contracts\Mapperable;
 use IanKok\MSWSDK\Entities\Image;
+use IanKok\MSWSDK\Entities\ImageDimension;
 use Psr\Http\Message\ResponseInterface;
 
 class ImagesMapper implements Mapperable
@@ -21,21 +22,22 @@ class ImagesMapper implements Mapperable
 
     private function map(array $data)
     {
-        $images = [];
-        foreach ($data as $element)
+
+        return array_map(
+            function ($image) {
+                return $this->mapEach($image);
+            },
+            $data
+        );
+    }
+
+    private function mapEach($image)
+    {
+        $imageDimensions = [];
+        foreach($image->images as $size => $dimensions)
         {
-            foreach ($element as $key => $value)
-            {
-                if ($key === 'images')
-                {
-                    foreach ($value as $size => $details){
-                        $images[]= new Image($element->_id, $size, $details->width, $details->height, $details->cdnUrl);
-                    }
-                }
-
-            }
-
+            $imageDimensions[] = new ImageDimension($size, $dimensions->width, $dimensions->height, $dimensions->cdnUrl);
         }
-        return $images;
+        return new Image($image->_id, $imageDimensions);
     }
 }

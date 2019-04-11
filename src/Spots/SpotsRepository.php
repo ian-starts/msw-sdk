@@ -5,6 +5,7 @@ namespace IanKok\MSWSDK\Spots;
 use GuzzleHttp\Promise\PromiseInterface;
 use IanKok\MSWSDK\Client\AuthenticatedMSWClient;
 use IanKok\MSWSDK\Contracts\Mapperable;
+use IanKok\MSWSDK\Entities\Spot;
 use Psr\Http\Message\ResponseInterface;
 
 class SpotsRepository
@@ -31,6 +32,9 @@ class SpotsRepository
         $this->mapper = $mapper;
     }
 
+    /**
+     * @return array | Spot[]
+     */
     public function list(): array
     {
         return $this->listAsync()->wait();
